@@ -1,0 +1,7 @@
+<ng-container *ngIf="show$ | async as showLoader">
+  <div [hidden]="!showLoader.show">
+    <div class="loader-overlay">
+      <div *ngIf="showLoader.show" class="loader"></div>
+    </div>
+  </div>
+</ng-container>

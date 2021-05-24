@@ -1,0 +1,42 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "data-source": [
+        "dist/data-source/data-source",
+        "dist/data-source"
+      ],
+      "rxdb": [
+        "dist/rxdb/rxdb",
+        "dist/rxdb"
+      ],
+      "rxdbdemo": [
+        "dist/rxdbdemo/rxdbdemo",
+        "dist/rxdbdemo"
+      ],
+      "test": [
+        "dist/test/test",
+        "dist/test"
+      ],
+      "todo": [
+        "dist/todo/todo",
+        "dist/todo"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": ["es2018", "dom"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false
+  }
+}

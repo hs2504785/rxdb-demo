@@ -1,0 +1,84 @@
+<mat-sidenav-container
+  class="app-sidenav-container"
+  [class.dark-theme]="isDarkTheme"
+  [dir]="dir"
+>
+  <mat-sidenav
+    #sidenav
+    class="app-sidenav mat-elevation-z10"
+    [opened]="!isScreenSmall"
+    [mode]="isScreenSmall ? 'over' : 'side'"
+  >
+    <mat-toolbar color="primary"> Performance </mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item>
+        <a
+          matLine
+          href="https://hs2504785.github.io/angular-performance-checklist/default/checklist/architecture"
+          target="_blank"
+          title="Follow Angular Performance Checklist"
+        >
+          Follow Angular Performance Checklist
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a
+          matLine
+          [routerLink]="['avoid-function-call']"
+          (click)="setTitle('Avoid Template Function Call, Use Pipe')"
+        >
+          Avoid Template Function
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a
+          matLine
+          [routerLink]="['avoid-function-call']"
+          (click)="setTitle('No console in prod environment')"
+        >
+          No Console
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a
+          matLine
+          [routerLink]="['ngfor-trackby']"
+          (click)="setTitle('Use trackBy with ngFor')"
+        >
+          NgFor TrackBy
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a
+          matLine
+          [routerLink]="['just-table']"
+          (click)="setTitle('Only include required module fromMaterial')"
+        >
+          Only Table Module in Build
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a
+          matLine
+          routerLink="/virtual-scroll/basic"
+          title="Avoid non tree shakable modules"
+        >
+          Avoid non tree shakable modules (import * as faker from 'faker';)
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <div class="app-sidenav-content">
+    <app-toolbar
+      [pageTitle]="pageTitle"
+      (toggleTheme)="toggleTheme()"
+      (toggleSidenav)="sidenav.toggle()"
+      (toggleDir)="toggleDir()"
+    >
+    </app-toolbar>
+    <div class="wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-sidenav-container>

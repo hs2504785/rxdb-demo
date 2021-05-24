@@ -1,0 +1,27 @@
+<header class="d-flex justify-content-between mt-2">
+  <h1>Edit todo</h1>
+</header>
+
+<form #form="ngForm" (ngSubmit)="updateTodo(form.value)">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      [ngModel]="todo.title"
+      name="title"
+    />
+  </div>
+  <div class="mb-3 form-check">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      id="completed"
+      [ngModel]="todo.completed"
+      name="completed"
+    />
+    <label class="form-check-label" for="completed">Completed</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Update Todo</button>
+</form>

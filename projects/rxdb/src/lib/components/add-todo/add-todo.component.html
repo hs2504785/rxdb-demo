@@ -1,0 +1,21 @@
+<header class="d-flex justify-content-between">
+  <h1>Add todo</h1>
+</header>
+
+<form #form="ngForm" (ngSubmit)="addTodo(form.value)">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" ngModel name="title" />
+  </div>
+  <div class="mb-3 form-check">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      id="completed"
+      ngModel
+      name="completed"
+    />
+    <label class="form-check-label" for="completed">Completed</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Todo</button>
+</form>
