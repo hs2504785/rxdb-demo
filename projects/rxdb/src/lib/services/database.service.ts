@@ -10,6 +10,7 @@ import { RxDBQueryBuilderPlugin } from 'rxdb/plugins/query-builder';
 addRxPlugin(RxDBQueryBuilderPlugin);
 
 import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
+import { HERO_SCHEMA } from 'projects/rxdbdemo/src/lib/schemas/hero.schema';
 addRxPlugin(RxDBUpdatePlugin);
 
 let todoCollection: any;
@@ -23,7 +24,7 @@ export async function initDatabase() {
   }
 
   const db = await createRxDatabase({
-    name: 'todosdb', // <- name
+    name: 'db', // <- name
     adapter: 'idb', // <- storage-adapter
     // password: 'myPassword',     // <- password (optional)
     multiInstance: true, // <- multiInstance (optional, default: true)
@@ -35,6 +36,16 @@ export async function initDatabase() {
   todoCollection = await window['db'].addCollections({
     todo: {
       schema: TODO_SCHEMA,
+    },
+    hero: {
+      name: 'hero',
+      schema: HERO_SCHEMA,
+      methods: {
+        hpPercent(this: any): number {
+          return (this.hp / this.maxHP) * 100;
+        },
+      },
+      sync: true,
     },
   });
 }

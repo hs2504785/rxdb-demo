@@ -5,7 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './rxdbdemo.component.html',
 })
 export class RxdbdemoComponent implements OnInit {
-  constructor() {}
+  public editedHero?: any;
 
-  ngOnInit(): void {}
+  constructor() {}
+  ngOnInit() {}
+
+  editHero(hero: any) {
+    this.editedHero = hero;
+  }
 }

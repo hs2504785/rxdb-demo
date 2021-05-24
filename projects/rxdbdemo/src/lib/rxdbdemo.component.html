@@ -1,3 +1,22 @@
 <div class="container">
-  <h1>dsads</h1>
+  <div id="top-line"></div>
+  <div class="content">
+    <h3>Demo</h3>
+
+    <hero-edit
+      *ngIf="editedHero"
+      [(hero)]="editedHero"
+      (done)="editedHero = undefined"
+    ></hero-edit>
+
+    <mat-card>
+      <mat-card-subtitle>Heroes</mat-card-subtitle>
+      <heroes-list (edit)="editHero($event)"></heroes-list>
+    </mat-card>
+    <br />
+    <mat-card>
+      <mat-card-subtitle>Add Hero</mat-card-subtitle>
+      <hero-insert></hero-insert>
+    </mat-card>
+  </div>
 </div>
