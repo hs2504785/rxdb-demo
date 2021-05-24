@@ -8,6 +8,10 @@
         "dist/data-source/data-source",
         "dist/data-source"
       ],
+      "dbsamples": [
+        "dist/dbsamples/dbsamples",
+        "dist/dbsamples"
+      ],
       "rxdb": [
         "dist/rxdb/rxdb",
         "dist/rxdb"

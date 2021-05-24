@@ -114,4 +114,8 @@ export class HerodbService {
     // this.todoService.updateTodo(todo); // Sync
     return await this.heroCollection.upsert(todo);
   }
+
+  async getHeroByName(name) {
+    return this.heroCollection.find().where('name').eq(name).exec();
+  }
 }

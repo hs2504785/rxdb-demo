@@ -225,6 +225,46 @@
           }
         }
       }
+    },
+    "dbsamples": {
+      "projectType": "library",
+      "root": "projects/dbsamples",
+      "sourceRoot": "projects/dbsamples/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/dbsamples/tsconfig.lib.json",
+            "project": "projects/dbsamples/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dbsamples/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dbsamples/src/test.ts",
+            "tsConfig": "projects/dbsamples/tsconfig.spec.json",
+            "karmaConfig": "projects/dbsamples/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dbsamples/tsconfig.lib.json",
+              "projects/dbsamples/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngdemos"

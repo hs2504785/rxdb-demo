@@ -13,6 +13,11 @@ const routes: Routes = [
       import('projects/rxdbdemo/src/public-api').then(m => m.RxdbdemoModule),
   },
   {
+    path: 'rxdb-samples',
+    loadChildren: () =>
+      import('projects/dbsamples/src/public-api').then(m => m.DbsamplesModule),
+  },
+  {
     path: 'demos',
     loadChildren: () => import('./demos/demos.module').then(m => m.DemosModule),
   },

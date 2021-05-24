@@ -5,7 +5,9 @@ import { TodoInterface } from '../models/todo.interface';
 import { DatabaseService } from './database.service';
 import { TodoService } from './todo.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class TododbService {
   todoCollection;
   constructor(
@@ -64,5 +66,9 @@ export class TododbService {
   async updateTodoItem(todo) {
     this.todoService.updateTodo(todo); // Sync
     return await this.todoCollection.upsert(todo);
+  }
+
+  async getTodoByName(name) {
+    return this.todoCollection.find().where('title').eq(name).exec();
   }
 }

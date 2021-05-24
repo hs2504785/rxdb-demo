@@ -47,7 +47,7 @@ const routes: Routes = [
     MatButtonModule,
     RouterModule.forChild(routes),
   ],
-  providers: [TodoResolver, TododbService],
+  providers: [TodoResolver],
   exports: [RxdbComponent],
 })
 export class RxdbModule {}

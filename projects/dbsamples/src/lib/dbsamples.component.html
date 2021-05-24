@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>Todos</h1>
+      <pre>
+        {{ todos$ | async | json }}
+      </pre>
+
+      <hr />
+      <h1>Single Todo ( Get One Document )</h1>
+      <form class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Enter Todo Title"
+              class="form-control"
+              #todoName
+              id="name"
+              placeholder="Username"
+            />
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="getTodo(todoName.value)"
+          >
+            Get Todo
+          </button>
+        </div>
+      </form>
+
+      <div>
+        {{ todo | json }}
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <h1>Heroes</h1>
+      <div>
+        {{ heroes$ | async | json }}
+      </div>
+
+      <hr />
+      <h1>Single Hero ( Get One Document )</h1>
+      <button class="btn btn-primary" (click)="getHero()">Get Hero</button>
+      <div>
+        {{ hero | json }}
+      </div>
+    </div>
+  </div>
+</div>
