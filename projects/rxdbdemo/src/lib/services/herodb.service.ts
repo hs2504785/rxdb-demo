@@ -9,7 +9,7 @@ export class HerodbService {
   heroCollection;
   constructor(private databaseService: DatabaseService) {
     this.heroCollection = this.databaseService.db.hero;
-    this.initHeroes(); // Sync
+    // this.initHeroes(); // Sync
   }
 
   initHeroes() {

@@ -32,3 +32,19 @@ https://www.npmjs.com/package/find-and
 1. Dev Challenges ( finding solution over internet may be hard )
 2. May be type safety ( Typescript wel supported )
 3. May be bundling issue ( Tree Shaking )
+
+## Rxdb Server
+
+https://warm-sierra-88348.herokuapp.com/db
+
+```
+// Local Server
+heroku local web
+
+// Deploy
+heroku login
+heroku create
+git Add -A
+git commit -m "deploy"
+git push heroku master
+```
