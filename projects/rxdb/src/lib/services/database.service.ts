@@ -39,7 +39,7 @@ export async function initDatabase() {
 
   const db = await createRxDatabase({
     name: DATABASE_NAME, // <- name
-    adapter: 'idb', // <- storage-adapter
+    adapter: IS_SERVER_SIDE_RENDERING ? 'memory' : 'idb', // <- storage-adapter
     // password: 'myPassword',     // <- password (optional)
     multiInstance: true, // <- multiInstance (optional, default: true)
     eventReduce: false, // <- eventReduce (optional, default: true)
