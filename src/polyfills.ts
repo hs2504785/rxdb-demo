@@ -77,3 +77,7 @@ import 'zone.js/dist/zone'; // Included with Angular CLI.
  * @link https://www.bennadel.com/blog/3448-binding-rxjs-observable-sources-outside-of-the-ngzone-in-angular-6-0-2.htm
  */
 import 'zone.js/dist/zone-patch-rxjs';
+
+// handle memory db
+global.Buffer = global.Buffer || require('buffer').Buffer;
+global.process = global.process || require('process');

@@ -27,7 +27,9 @@
       "todo": [
         "dist/todo/todo",
         "dist/todo"
-      ]
+      ],
+      "stream": ["node_modules/stream-browserify"],
+      "process": ["node_modules/process"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { createRxDatabase, addRxPlugin } from 'rxdb/plugins/core';
 import { TODO_SCHEMA } from '../schemas/todo.schema';
-addRxPlugin(require('pouchdb-adapter-idb'));
-
+import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
 import * as PouchHttpPlugin from 'pouchdb-adapter-http';
-addRxPlugin(PouchHttpPlugin);
+import { RxDBNoValidatePlugin } from 'rxdb/plugins/no-validate';
 
 import { RxDBValidatePlugin } from 'rxdb/plugins/validate';
 addRxPlugin(RxDBValidatePlugin);
@@ -17,7 +16,7 @@ import { HERO_SCHEMA } from 'projects/rxdbdemo/src/lib/schemas/hero.schema';
 addRxPlugin(RxDBUpdatePlugin);
 
 import { RxDBReplicationPlugin } from 'rxdb/plugins/replication';
-addRxPlugin(RxDBReplicationPlugin);
+// addRxPlugin(RxDBReplicationPlugin);
 
 import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election';
 import {
@@ -25,9 +24,50 @@ import {
   DATABASE_NAME,
   IS_SERVER_SIDE_RENDERING,
 } from '../utils/util';
-addRxPlugin(RxDBLeaderElectionPlugin);
 
 let todoCollection: any;
+
+/**
+ * Loads RxDB plugins
+ */
+async function loadRxDBPlugins(): Promise<void> {
+  addRxPlugin(RxDBReplicationPlugin);
+  // http-adapter is always needed for replication with the node-server
+  addRxPlugin(PouchHttpPlugin);
+
+  if (IS_SERVER_SIDE_RENDERING) {
+    // for server side rendering, import the memory adapter
+    const PouchdbAdapterMemory = require('pouchdb-adapter-' + 'memory');
+    addRxPlugin(PouchdbAdapterMemory);
+  } else {
+    // else, use indexeddb
+    addRxPlugin(PouchdbAdapterIdb);
+
+    // then we also need the leader election
+    addRxPlugin(RxDBLeaderElectionPlugin);
+  }
+
+  /**
+   * to reduce the build-size,
+   * we use some modules in dev-mode only
+   */
+  if (isDevMode() && !IS_SERVER_SIDE_RENDERING) {
+    await Promise.all([
+      // add dev-mode plugin
+      // which does many checks and add full error-messages
+      import('rxdb/plugins/dev-mode').then(module => addRxPlugin(module)),
+
+      // we use the schema-validation only in dev-mode
+      // this validates each document if it is matching the jsonschema
+      import('rxdb/plugins/validate').then(module => addRxPlugin(module)),
+    ]);
+  } else {
+    // in production we use the no-validate module instead of the schema-validation
+    // to reduce the build-size
+    addRxPlugin(RxDBNoValidatePlugin);
+  }
+}
+
 /**
  * This is run via APP_INITIALIZER in app.module.ts
  * to ensure the database exists before the angular-app starts up
@@ -36,6 +76,8 @@ export async function initDatabase() {
   if (todoCollection) {
     return;
   }
+
+  await loadRxDBPlugins();
 
   const db = await createRxDatabase({
     name: DATABASE_NAME, // <- name
