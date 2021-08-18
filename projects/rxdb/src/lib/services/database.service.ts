@@ -109,9 +109,10 @@ export async function initDatabase() {
 }
 
 function handleSync(db) {
-  const syncURL = IS_SERVER_SIDE_RENDERING
-    ? 'https://warm-sierra-88348.herokuapp.com/' + DATABASE_NAME
-    : 'http://localhost' + ':' + COUCHDB_PORT + '/' + DATABASE_NAME;
+  const syncURL = 'https://warm-sierra-88348.herokuapp.com/' + DATABASE_NAME;
+  // const syncURL = IS_SERVER_SIDE_RENDERING
+  //   ? 'https://warm-sierra-88348.herokuapp.com/' + DATABASE_NAME
+  //   : 'http://localhost' + ':' + COUCHDB_PORT + '/' + DATABASE_NAME;
 
   db.hero.sync({
     remote: `${syncURL}/heroes`,
